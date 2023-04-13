@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+body {
+    background-color: #292929;
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding-left: 4rem;
+}
+
+.strings {
+    color: #e6ca00;
+}
+
+.keywords {
+    color: #ab3131;
+}
+
+.operators {
+    color: #2dbd03;
+}
+
+.chars {
+    color: #036cbd;
+}
+
+.comments {
+    color: #606060;
+}
+
+.integers {
+    color: #8b00d9;
+}
+
+.reals {
+    color: #000283;
+}

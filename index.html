@@ -1,0 +1,57 @@
+<head>
+     <link rel='stylesheet' type='text/css' href='estilos.css'>
+     <title>Resaltador de sintaxis</title>
+    </head>
+    <style>
+      span *{color:inherit !important}
+    </style>
+    <pre><span class=keywords>using</span> System<span class=operators>;</span>
+
+<span class=keywords>class</span> Program <span class=operators>{</span>
+    <span class=keywords>static</span> <span class=keywords>void</span> Main<span class=operators>(</span><span class=keywords>string</span><span class=operators>[]</span> args<span class=operators>)</span> <span class=operators>{</span>
+        <span class=comments><span class=operators>//</span> Pide al usuario que ingrese un número arábigo
+</span>        Console<span class=operators>.</span>WriteLine<span class=operators>(</span><span class=strings>"Ingrese un número arábigo<span class=operators>:</span>"</span><span class=operators>);</span>
+        <span class=keywords>int</span> numArabigo <span class=operators>=</span> <span class=keywords>int</span><span class=operators>.</span>Parse<span class=operators>(</span>Console<span class=operators>.</span>ReadLine<span class=operators>());</span>
+        
+        <span class=comments><span class=operators>//</span> Convierte el número arábigo a número romano
+</span>        <span class=keywords>string</span> numRomano <span class=operators>=</span> ConvertArabigoToRoman<span class=operators>(</span>numArabigo<span class=operators>);</span>
+        
+        <span class=comments><span class=operators>//</span> Muestra el número romano resultante
+</span>        Console<span class=operators>.</span>WriteLine<span class=operators>(</span><span class=strings>"El número romano es<span class=operators>:</span> "</span> <span class=operators>+</span> numRomano<span class=operators>);</span>
+    <span class=operators>}</span>
+    
+    <span class=comments><span class=operators>//</span> Función para convertir números arábigos a números romanos
+</span>    <span class=keywords>static</span> <span class=keywords>string</span> ConvertArabigoToRoman<span class=operators>(</span><span class=keywords>int</span> number<span class=operators>)</span> <span class=operators>{</span>
+        <span class=keywords>if</span> <span class=operators>(</span>number <span class=operators><</span> <span class=integers>1</span> <span class=operators>||</span> number <span class=operators>></span> <span class=integers>3999</span><span class=operators>)</span> <span class=operators>{</span>
+            <span class=keywords>throw</span> <span class=keywords>new</span> ArgumentException<span class=operators>(</span><span class=strings>"Número fuera de rango<span class=operators>.</span>"</span><span class=operators>);</span>
+        <span class=operators>}</span>
+        
+        <span class=keywords>string</span><span class=operators>[]</span> thousands <span class=operators>=</span> <span class=operators>{</span><span class=strings>""</span><span class=operators>,</span> <span class=strings>"M"</span><span class=operators>,</span> <span class=strings>"MM"</span><span class=operators>,</span> <span class=strings>"MMM"</span><span class=operators>};</span>
+        <span class=keywords>string</span><span class=operators>[]</span> hundreds <span class=operators>=</span> <span class=operators>{</span><span class=strings>""</span><span class=operators>,</span> <span class=strings>"C"</span><span class=operators>,</span> <span class=strings>"CC"</span><span class=operators>,</span> <span class=strings>"CCC"</span><span class=operators>,</span> <span class=strings>"CD"</span><span class=operators>,</span> <span class=strings>"D"</span><span class=operators>,</span> <span class=strings>"DC"</span><span class=operators>,</span> <span class=strings>"DCC"</span><span class=operators>,</span> <span class=strings>"DCCC"</span><span class=operators>,</span> <span class=strings>"CM"</span><span class=operators>};</span>
+        <span class=keywords>string</span><span class=operators>[]</span> tens <span class=operators>=</span> <span class=operators>{</span><span class=strings>""</span><span class=operators>,</span> <span class=strings>"X"</span><span class=operators>,</span> <span class=strings>"XX"</span><span class=operators>,</span> <span class=strings>"XXX"</span><span class=operators>,</span> <span class=strings>"XL"</span><span class=operators>,</span> <span class=strings>"L"</span><span class=operators>,</span> <span class=strings>"LX"</span><span class=operators>,</span> <span class=strings>"LXX"</span><span class=operators>,</span> <span class=strings>"LXXX"</span><span class=operators>,</span> <span class=strings>"XC"</span><span class=operators>};</span>
+        <span class=keywords>string</span><span class=operators>[]</span> ones <span class=operators>=</span> <span class=operators>{</span><span class=strings>""</span><span class=operators>,</span> <span class=strings>"I"</span><span class=operators>,</span> <span class=strings>"II"</span><span class=operators>,</span> <span class=strings>"III"</span><span class=operators>,</span> <span class=strings>"IV"</span><span class=operators>,</span> <span class=strings>"V"</span><span class=operators>,</span> <span class=strings>"VI"</span><span class=operators>,</span> <span class=strings>"VII"</span><span class=operators>,</span> <span class=strings>"VIII"</span><span class=operators>,</span> <span class=strings>"IX"</span><span class=operators>};</span>
+        
+        <span class=keywords>string</span> result <span class=operators>=</span> <span class=strings>""</span><span class=operators>;</span>
+        
+        <span class=comments><span class=operators>//</span> Agrega los miles
+</span>        <span class=keywords>int</span> thousandsDigit <span class=operators>=</span> number <span class=operators>/</span> <span class=integers>1000</span><span class=operators>;</span>
+        result <span class=operators>+=</span> thousands<span class=operators>[</span>thousandsDigit<span class=operators>];</span>
+        number <span class=operators>%=</span> <span class=integers>1000</span><span class=operators>;</span>
+        
+        <span class=comments><span class=operators>//</span> Agrega las centenas
+</span>        <span class=keywords>int</span> hundredsDigit <span class=operators>=</span> number <span class=operators>/</span> <span class=integers>100</span><span class=operators>;</span>
+        result <span class=operators>+=</span> hundreds<span class=operators>[</span>hundredsDigit<span class=operators>];</span>
+        number <span class=operators>%=</span> <span class=integers>100</span><span class=operators>;</span>
+        
+        <span class=comments><span class=operators>//</span> Agrega las decenas
+</span>        <span class=keywords>int</span> tensDigit <span class=operators>=</span> number <span class=operators>/</span> <span class=integers>10</span><span class=operators>;</span>
+        result <span class=operators>+=</span> tens<span class=operators>[</span>tensDigit<span class=operators>];</span>
+        number <span class=operators>%=</span> <span class=integers>10</span><span class=operators>;</span>
+        
+        <span class=comments><span class=operators>//</span> Agrega las unidades
+</span>        <span class=keywords>int</span> onesDigit <span class=operators>=</span> number<span class=operators>;</span>
+        result <span class=operators>+=</span> ones<span class=operators>[</span>onesDigit<span class=operators>];</span>
+        
+        <span class=keywords>return</span> result<span class=operators>;</span>
+    <span class=operators>}</span>
+<span class=operators>}</span></pre>
