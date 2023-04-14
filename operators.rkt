@@ -1,6 +1,6 @@
 #lang racket
 ;; File: operators.rkt
-;; Autores: 
+;; Autores (Nombre y Matrícula): 
 ;; José Emiliano Riosmena Castañón A01704245
 ;; Iván Ricardo Paredes Avilez A01705083
 ;; Fecha: 12 de Abril del 2023
