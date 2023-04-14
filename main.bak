@@ -14,13 +14,6 @@
 (require "strings.rkt")
 (require "keywords.rkt")
 
-;; Función para mostrar el tiempo de ejecución
-(define (show-execution-time proc)
-  (define start-time (current-inexact-milliseconds))
-  (proc)
-  (define end-time (current-inexact-milliseconds))
-  (displayln (format "Tiempo de ejecución: ~a ms" (- end-time start-time))))
-
 ;; Lectura de archivos------
 (define inputFile
   (file->string "input.txt"))
@@ -52,7 +45,5 @@
 ;; Archivo de salida--------
 (define outputFile
   (open-output-file "index.html" #:exists 'replace))
-;; Mostrar tiempo de ejecución
-(show-execution-time (lambda ()
-                       (write-string output outputFile)))
+(write-string output outputFile)
 (close-output-port outputFile)
